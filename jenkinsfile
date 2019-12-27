@@ -20,8 +20,13 @@ pipeline {
 		
 		// This step should not normally be used in your script. Consult the inline help for details.
 		archive excludes: 'Use default excludes,Treat include and exclude patterns as case sensitive', includes: 'spring-boot-samples/spring-boot-sample-atmosphere/target/*.jar'
-
-      }
+		
+		//JUNIT Report
+     		junit 'spring-boot-samples/spring-boot-sample-atmosphere/target/surefire-reports/*.xml'
+		
+		//HTML Report
+		publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'spring-boot-samples/spring-boot-sample-atmosphere/target/site/jacoco', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
+     }
     }
 	
   }
