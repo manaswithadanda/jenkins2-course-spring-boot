@@ -5,18 +5,23 @@ pipeline {
       steps {
 		// Checkout
 		checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/manaswithadanda/jenkins2-course-spring-boot.git']]])
-		// Build Code
-  		  powershell label: '', script: 'mvn clean package'
+	}
     }
-    stage('Compile') { 
+    
+   stage('Compile') { 
       tools {
         // Specify Tool Name from your global tool configuration
 		jdk 'jdk8'
         	maven 'MavenConfiguration'
       }
       steps {
-			// Some Step
+		//Step
+		powershell label: '', script: 'mvn -f spring-boot-samples/spring-boot-sample-atmosphere/pom.xml clean package'
+
+		// Build Code
+  		  powershell label: '', script: 'mvn clean package'
       }
     }
+	
   }
 }
