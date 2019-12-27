@@ -5,7 +5,8 @@ pipeline {
       steps {
 		// Checkout
 		checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/manaswithadanda/jenkins2-course-spring-boot.git']]])
-      }
+		// Build Code
+  		  powershell label: '', script: 'mvn clean package'
     }
     stage('Compile') { 
       tools {
