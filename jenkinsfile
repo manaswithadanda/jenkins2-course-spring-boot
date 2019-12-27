@@ -17,6 +17,9 @@ pipeline {
       steps {
 		//Step
 		powershell label: '', script: 'mvn -f spring-boot-samples/spring-boot-sample-atmosphere/pom.xml clean package'
+		
+		// This step should not normally be used in your script. Consult the inline help for details.
+		archive excludes: 'Use default excludes,Treat include and exclude patterns as case sensitive', includes: 'spring-boot-samples/spring-boot-sample-atmosphere/target/*.jar'
 
       }
     }
