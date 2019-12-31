@@ -18,6 +18,10 @@ pipeline {
 		//Step
 		powershell label: '', script: 'mvn -f spring-boot-samples/spring-boot-sample-atmosphere/pom.xml clean package'
 		
+		//Sending Email
+     		//emailext body: 'MAIL BODY', subject: 'SUBJECT', to: 'manaswitha.danda@pratian.com'
+		step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: 'manaswitha.danda@pratian.com', sendToIndividuals: false])
+		
 		// This step should not normally be used in your script. Consult the inline help for details.
 		archive excludes: 'Use default excludes,Treat include and exclude patterns as case sensitive', includes: 'spring-boot-samples/spring-boot-sample-atmosphere/target/*.jar'
 		
@@ -27,10 +31,7 @@ pipeline {
 		//HTML Report
 		publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'spring-boot-samples/spring-boot-sample-atmosphere/target/site/jacoco', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
      		
-		//Sending Email
-     		//emailext body: 'MAIL BODY', subject: 'SUBJECT', to: 'manaswitha.danda@pratian.com'
-		step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: 'manaswitha.danda@pratian.com', sendToIndividuals: false])
-
+		
      }
     }
 	
