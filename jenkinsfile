@@ -28,7 +28,9 @@ pipeline {
 		publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'spring-boot-samples/spring-boot-sample-atmosphere/target/site/jacoco', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
      		
 		//Sending Email
-     		emailext body: 'MAIL BODY', subject: 'SUBJECT', to: 'manaswitha.danda@pratian.com'
+     		//emailext body: 'MAIL BODY', subject: 'SUBJECT', to: 'manaswitha.danda@pratian.com'
+		step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: 'manaswitha.danda@pratian.com', sendToIndividuals: false])
+
      }
     }
 	
